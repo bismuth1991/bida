@@ -2,6 +2,7 @@
   "name": "bida",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,18 +10,34 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.6"
+    "clsx": "2.1.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "next": "14.2.6",
+    "tailwind-merge": "2.5.2",
+    "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "typescript": "5.5.4",
+    "@types/eslint": "^8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.6"
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^6",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.6",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-perfectionist": "2.3.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "postcss": "8.4.41",
+    "prettier": "3.3.3",
+    "prettier-plugin-tailwindcss": "0.6.6",
+    "tailwindcss": "3.4.10"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "eslint-plugin-perfectionist@2.3.0": "patches/eslint-plugin-perfectionist@2.3.0.patch"
+    }
   }
 }
