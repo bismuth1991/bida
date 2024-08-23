@@ -26,9 +26,11 @@ const seed = async () => {
       { x: 20, y: 80, z: 53 },
       { x: 10, y: 80, z: 54.5 },
       { x: 0, y: 80, z: 56 },
-    ].map((data) => ({
+    ].map(({ z, ...data }) => ({
       ...data,
       id: nanoid(),
+      z1: z,
+      z2: z,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     })),

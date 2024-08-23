@@ -1,7 +1,8 @@
 export type DataPoint = {
   x: number
   y: number
-  z: number
+  z1: number
+  z2: number
   type: 'test' | 'interpolated'
 }
 
@@ -18,14 +19,16 @@ export const interpolate = (points: DataPoint[]): DataPoint[] => {
       const start = yGroup[i]
       const end = yGroup[i + 1]
       const numPoints = end.x - start.x - 1 // Deduce number of points based on x difference
-      const zStep = (end.z - start.z) / (numPoints + 1)
+      const z1Step = (end.z1 - start.z1) / (numPoints + 1)
+      const z2Step = (end.z2 - start.z2) / (numPoints + 1)
 
       allPoints.push(start) // Add the start point
 
       for (let j = 1; j <= numPoints; j++) {
-        const z = start.z + zStep * j
+        const z1 = start.z1 + z1Step * j
+        const z2 = start.z2 + z2Step * j
         const x = start.x + j
-        allPoints.push({ x, y: start.y, z, type: 'interpolated' })
+        allPoints.push({ x, y: start.y, z1, z2, type: 'interpolated' })
       }
     }
     allPoints.push(yGroup[yGroup.length - 1]) // Add the last point of the group
@@ -39,14 +42,16 @@ export const interpolate = (points: DataPoint[]): DataPoint[] => {
       const start = xGroup[i]
       const end = xGroup[i + 1]
       const numPoints = end.y - start.y - 1 // Deduce number of points based on y difference
-      const zStep = (end.z - start.z) / (numPoints + 1)
+      const z1Step = (end.z1 - start.z1) / (numPoints + 1)
+      const z2Step = (end.z2 - start.z2) / (numPoints + 1)
 
       finalPoints.push(start) // Add the start point
 
       for (let j = 1; j <= numPoints; j++) {
-        const z = start.z + zStep * j
+        const z1 = start.z1 + z1Step * j
+        const z2 = start.z2 + z2Step * j
         const y = start.y + j
-        finalPoints.push({ x: start.x, y, z, type: 'interpolated' })
+        finalPoints.push({ x: start.x, y, z1, z2, type: 'interpolated' })
       }
     }
     finalPoints.push(xGroup[xGroup.length - 1]) // Add the last point of the group

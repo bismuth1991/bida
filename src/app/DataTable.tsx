@@ -35,12 +35,20 @@ export const DataTable: FC<{
               {group.map((point, i) => (
                 <td
                   key={i}
-                  className={cn('size-20 bg-white text-center', {
-                    'bg-red-300':
+                  className={cn('relative size-20 bg-white', {
+                    'bg-yellow-200 font-semibold':
                       point.type === 'test' && hilightTestDataPoints,
                   })}
                 >
-                  {point.z.toFixed(2)}
+                  <span className="absolute left-2 top-2 text-green-800">
+                    {point.z1.toFixed(2)}
+                    {point.type === 'test' && <sup>(3)</sup>}
+                  </span>
+
+                  <span className="absolute bottom-2 right-2 text-blue-800">
+                    {point.z2.toFixed(2)}
+                    {point.type === 'test' && <sup>(4)</sup>}
+                  </span>
                 </td>
               ))}
             </tr>

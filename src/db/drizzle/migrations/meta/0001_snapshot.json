@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "8b769de7-af21-4ad5-8e1b-3b3ee7218ade",
-  "prevId": "d621f2e7-f7c1-4489-8659-7ab42fa1e1cd",
+  "id": "1cb5b4cc-32bb-4ec5-b3e9-fe69e4563090",
+  "prevId": "32e63074-2947-4fd9-bfcd-750eb50bc9c8",
   "tables": {
     "data_point": {
       "name": "data_point",
@@ -28,8 +28,15 @@
           "notNull": true,
           "autoincrement": false
         },
-        "z": {
-          "name": "z",
+        "z_1": {
+          "name": "z_1",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "z_2": {
+          "name": "z_2",
           "type": "real",
           "primaryKey": false,
           "notNull": true,
