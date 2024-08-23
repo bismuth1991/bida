@@ -1,8 +1,7 @@
 import type { DataPoint } from './utils/data-point'
 
-import clsx from 'clsx'
-
 import { interpolate, groupBy } from './utils/data-point'
+import { cn } from './components/utils'
 
 export default function Home() {
   const inputPoints: DataPoint[] = [
@@ -53,7 +52,7 @@ export default function Home() {
               {group.map((point, i) => (
                 <td
                   key={i}
-                  className={clsx('size-12', {
+                  className={cn('size-12', {
                     'bg-red-300': point.type === 'test',
                   })}
                 >
