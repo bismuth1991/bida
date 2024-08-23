@@ -1,7 +1,17 @@
 import type { DataPoint } from './utils/data-point'
 
+import { HomeIcon } from 'lucide-react'
+
 import { interpolate, groupBy } from './utils/data-point'
-import { cn } from './components/ui/utils'
+import { cn } from './components/utils'
+import {
+  BreadcrumbSeparator,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  Breadcrumb,
+} from './components/ui/Breadcrumb'
 
 export default function Home() {
   const inputPoints: DataPoint[] = [
@@ -31,38 +41,59 @@ export default function Home() {
   const groupedByY = groupBy(points, 'y')
 
   return (
-    <main className="min-w-fit p-10">
-      <table className="border border-black">
-        <thead className="border-b border-black">
-          <tr className="divide-x divide-black">
-            <th className="block size-12"></th>
-            {groupedByY[0].map((point) => (
-              <th key={point.x} scope="col" className="size-12">
-                {point.x}
-              </th>
-            ))}
-          </tr>
-        </thead>
+    <main className="min-w-fit px-6 pb-6">
+      <Breadcrumb className="mt-4 flex h-14 items-center">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <HomeIcon className="size-3.5" />
+            </BreadcrumbLink>
+          </BreadcrumbItem>
 
-        <tbody className="divide-y divide-black">
-          {groupedByY.map((group) => (
-            <tr key={group[0].y} className="divide-x divide-black">
-              <th scope="row">{group[0].y}</th>
+          <BreadcrumbSeparator />
 
-              {group.map((point, i) => (
-                <td
-                  key={i}
-                  className={cn('size-12', {
-                    'bg-red-300': point.type === 'test',
-                  })}
-                >
-                  {point.z.toFixed(2)}
-                </td>
+          <BreadcrumbItem>
+            <BreadcrumbPage>Projected Data</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
+      <div className="overflow-hidden rounded-md border border-slate-300">
+        <table className="w-full table-fixed text-sm">
+          <thead className="border-b border-slate-300">
+            <tr className="divide-x divide-slate-300">
+              <th className="size-20 bg-slate-200"></th>
+
+              {groupedByY[0].map((point) => (
+                <th key={point.x} scope="col" className="size-20 bg-slate-200">
+                  {point.x}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody className="divide-y divide-slate-300">
+            {groupedByY.map((group) => (
+              <tr key={group[0].y} className="divide-x divide-slate-300">
+                <th scope="row" className="size-20 bg-slate-200">
+                  {group[0].y}
+                </th>
+
+                {group.map((point, i) => (
+                  <td
+                    key={i}
+                    className={cn('size-20 bg-white text-center', {
+                      'bg-red-300': point.type === 'test',
+                    })}
+                  >
+                    {point.z.toFixed(2)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </main>
   )
 }
