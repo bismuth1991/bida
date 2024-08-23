@@ -1,10 +1,11 @@
+import { api } from '~/trpc/server'
+
 import { generateTableDataWithStep, DataTable } from './DataTable'
-import { fetchDataPoints } from './utils/data-point.server'
 import { interpolate } from './utils/data-point'
 import { Breadcrumbs } from './Breadcrumbs'
 
 const ProjectedDataPage = async () => {
-  const dataPoints = await fetchDataPoints()
+  const dataPoints = await api.dataPoint.getAll()
 
   return (
     <main className="min-w-fit px-6 pb-6">
