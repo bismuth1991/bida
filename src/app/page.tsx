@@ -1,7 +1,7 @@
 import type { DataPoint } from './utils/data-point'
 
 import { interpolate, groupBy } from './utils/data-point'
-import { cn } from './components/utils'
+import { cn } from './components/ui/utils'
 
 export default function Home() {
   const inputPoints: DataPoint[] = [
