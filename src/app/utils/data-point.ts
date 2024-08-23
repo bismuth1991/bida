@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 export type DataPoint = {
   x: number
   y: number
@@ -6,7 +8,7 @@ export type DataPoint = {
   type: 'test' | 'interpolated'
 }
 
-export const interpolate = (points: DataPoint[]): DataPoint[] => {
+export const interpolate = (points: DataPoint[]) => {
   // Sort the points by y first, and then by x within each y group
   points.sort((a, b) => (a.y === b.y ? a.x - b.x : a.y - b.y))
 
@@ -68,7 +70,7 @@ export const groupBy = (
   const groups: Record<string, DataPoint[]> = {}
 
   points.forEach((point) => {
-    const groupKey = point[key].toString()
+    const groupKey = point[key]
     if (!groups[groupKey]) {
       groups[groupKey] = []
     }
@@ -77,3 +79,10 @@ export const groupBy = (
 
   return Object.values(groups)
 }
+
+export const AddDataPointFormSchema = z.object({
+  x: z.coerce.number(),
+  y: z.coerce.number(),
+  z1: z.coerce.number(),
+  z2: z.coerce.number(),
+})

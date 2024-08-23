@@ -5,6 +5,9 @@ import type { Metadata } from 'next'
 
 import { Inter } from 'next/font/google'
 
+import { TRPCReactProvider } from '~/trpc/react'
+import { HydrateClient } from '~/trpc/server'
+
 import { TooltipProvider } from './components/ui/Tooltip'
 import { AsideNavs } from './AsideNavs'
 import { cn } from './components/utils'
@@ -25,7 +28,9 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
               <AsideNavs />
             </aside>
 
-            <div>{children}</div>
+            <TRPCReactProvider>
+              <HydrateClient>{children}</HydrateClient>
+            </TRPCReactProvider>
           </div>
         </TooltipProvider>
       </body>

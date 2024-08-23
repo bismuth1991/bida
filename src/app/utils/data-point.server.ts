@@ -1,5 +1,7 @@
-import { dataPoint } from '~/db/drizzle/schema'
-import { dz } from '~/db/drizzle'
+'use server'
+
+import { dataPoint } from '~/server/db/drizzle/schema'
+import { dz } from '~/server/db/drizzle'
 
 export const fetchDataPoints = async () => {
   const result = await dz

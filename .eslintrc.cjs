@@ -61,13 +61,13 @@ const config = {
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
     '@typescript-eslint/array-type': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
-    '@typescript-eslint/consistent-type-imports': [
-      'error',
-      {
-        fixStyle: 'separate-type-imports',
-        prefer: 'type-imports',
-      },
-    ],
+    // '@typescript-eslint/consistent-type-imports': [
+    //   'error',
+    //   {
+    //     fixStyle: 'separate-type-imports',
+    //     prefer: 'type-imports',
+    //   },
+    // ],
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
