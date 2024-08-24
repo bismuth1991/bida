@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `data_point_x_y_unique` ON `data_point` (`x`,`y`);
