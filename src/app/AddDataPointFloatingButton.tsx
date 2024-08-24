@@ -48,7 +48,7 @@ export const AddDataPointFloatingButton = () => {
   })
 
   const { mutateAsync: createDataPoint, isPending } =
-    api.dataPoint.create.useMutation()
+    api.dataPoint.upsert.useMutation()
 
   const onSubmit = async (data: z.output<typeof AddDataPointFormSchema>) => {
     await createDataPoint(data)

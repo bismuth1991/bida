@@ -1,5 +1,6 @@
 import type { TRPCRouterRecord } from '@trpc/server'
 
+import { and, eq } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
 
 import { AddDataPointFormSchema } from '~/app/utils/data-point'
@@ -25,14 +26,35 @@ export const dataPointRouter = {
       )
   }),
 
-  create: publicProcedure
+  upsert: publicProcedure
     .input(AddDataPointFormSchema)
     .mutation(async ({ ctx, input }) => {
-      await ctx.dz.insert(dataPoint).values({
-        id: nanoid(),
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        ...input,
-      })
+      const [rowToUpdate] = await ctx.dz
+        .select()
+        .from(dataPoint)
+        .where(
+          and(
+            eq(dataPoint.x, input.x), //
+            eq(dataPoint.y, input.y),
+          ),
+        )
+
+      if (rowToUpdate) {
+        await ctx.dz
+          .update(dataPoint)
+          .set({
+            z1: input.z1,
+            z2: input.z2,
+            updatedAt: Date.now(),
+          })
+          .where(eq(dataPoint.id, rowToUpdate.id))
+      } else {
+        await ctx.dz.insert(dataPoint).values({
+          id: nanoid(),
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+          ...input,
+        })
+      }
     }),
 } satisfies TRPCRouterRecord
