@@ -10,5 +10,5 @@ export const dz = drizzle(
 )
 
 export const migrate = () => {
-  void _migrate(dz, { migrationsFolder: './src/db/drizzle/migrations' })
+  void _migrate(dz, { migrationsFolder: './src/server/db/drizzle/migrations' })
 }
