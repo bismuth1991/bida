@@ -1,13 +1,29 @@
+'use client'
+
 import type { DataPoint } from './utils/data-point'
 import type { FC } from 'react'
 
+import { EditIcon } from 'lucide-react'
+
+import { Button } from './components/ui/Button'
 import { cn } from './components/utils'
 
 export const DataTable: FC<{
   hilightTestDataPoints?: boolean
   dataPoints: DataPoint[]
+  openAddDataPointSheet?: (defaultValues: {
+    x: number
+    y: number
+    z1: number
+    z2: number
+  }) => void
   generateTableData: (dataPoints: DataPoint[]) => TableDataPoint[][]
-}> = ({ dataPoints, hilightTestDataPoints = false, generateTableData }) => {
+}> = ({
+  hilightTestDataPoints = false,
+  dataPoints,
+  openAddDataPointSheet,
+  generateTableData,
+}) => {
   const tableData = generateTableData(dataPoints)
 
   return (
@@ -34,12 +50,36 @@ export const DataTable: FC<{
 
               {group.map((point, i) => {
                 if (!point.z1 || !point.z2) {
-                  return <td key={i} className="size-20 bg-white"></td>
+                  return (
+                    <td key={i} className="group relative size-20 bg-white">
+                      {openAddDataPointSheet && (
+                        <div className="absolute inset-0 hidden items-center justify-center group-hover:flex">
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => {
+                              openAddDataPointSheet({
+                                x: point.x,
+                                y: point.y,
+                                z1: point.z1 ?? 0,
+                                z2: point.z2 ?? 0,
+                              })
+                            }}
+                          >
+                            <span className="sr-only">
+                              Add or Edit data point
+                            </span>
+                            <EditIcon className="size-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </td>
+                  )
                 }
                 return (
                   <td
                     key={i}
-                    className={cn('relative size-20 bg-white', {
+                    className={cn('group relative size-20 bg-white', {
                       'bg-yellow-200 font-semibold':
                         point.type === 'test' && hilightTestDataPoints,
                     })}
@@ -53,6 +93,28 @@ export const DataTable: FC<{
                       {point.z2.toFixed(2)}
                       {point.type === 'test' && <sup>(4)</sup>}
                     </span>
+
+                    {openAddDataPointSheet && (
+                      <div className="absolute inset-0 hidden items-center justify-center group-hover:flex">
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          onClick={() => {
+                            openAddDataPointSheet({
+                              x: point.x,
+                              y: point.y,
+                              z1: point.z1 ?? 0,
+                              z2: point.z2 ?? 0,
+                            })
+                          }}
+                        >
+                          <span className="sr-only">
+                            Add or Edit data point
+                          </span>
+                          <EditIcon className="size-4" />
+                        </Button>
+                      </div>
+                    )}
                   </td>
                 )
               })}

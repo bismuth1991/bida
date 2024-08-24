@@ -1,7 +1,6 @@
 import { api } from '~/trpc/server'
 
-import { generateTableDataNoStep, DataTable } from '../DataTable'
-import { AddDataPointFloatingButton } from '../AddDataPointFloatingButton'
+import { DataTableWithFloatingButton } from './DataTableWithFloatingButton'
 import { Breadcrumbs } from '../Breadcrumbs'
 
 const TestDataPage = async () => {
@@ -10,12 +9,7 @@ const TestDataPage = async () => {
   return (
     <main className="min-w-fit px-6 pb-6">
       <Breadcrumbs page="Test Data" />
-      <DataTable
-        generateTableData={generateTableDataNoStep}
-        dataPoints={dataPoints}
-      />
-
-      <AddDataPointFloatingButton />
+      <DataTableWithFloatingButton dataPoints={dataPoints} />
     </main>
   )
 }
