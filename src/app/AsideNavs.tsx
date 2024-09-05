@@ -25,6 +25,7 @@ export const AsideNavs = () => {
           <TooltipTrigger asChild>
             <Link
               href={href}
+              prefetch={true}
               className={cn(
                 buttonVariants({
                   variant: pathname === href ? 'default' : 'ghost',
